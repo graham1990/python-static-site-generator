@@ -7,3 +7,11 @@ class Site:
 
   def create_dir(self, path):
     directory = self.dest + '/' + path.relative_to(self.source)
+    directory.mkdir(parents=True, exist_ok = True)
+
+  def build(self):
+    self.dest.mkdir(parents=True, exist_ok = True)
+    for each_path in self.source.rglob("*"):
+      if each_path.isDirectory():
+        self.create_dir()
+    
